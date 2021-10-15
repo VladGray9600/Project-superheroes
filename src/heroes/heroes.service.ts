@@ -22,17 +22,17 @@ export class HeroesService {
         return this.heroesModel.findById(id)
     }
 
-    async create(heroDto: CreateHeroDto, picture) : Promise<Heroes> {
-        const picturePath = this.fileService.createFile(FileType.IMAGE, picture)
-        const newHero = await this.heroesModel.create({...heroDto, picture : picturePath})
-        return newHero;
+    async create(heroDto: CreateHeroDto) : Promise<Heroes> {
+        //const picturePath = this.fileService.createFile(FileType.IMAGE, picture)
+        const newHero = await new this.heroesModel(heroDto)
+        return newHero.save();
     }
 
     async update(id: string, heroDto: UpdateHeroDto, ): Promise<Heroes> {
         return this.heroesModel.findByIdAndUpdate(id, heroDto,{new: true})
     }
 
-    async remove(id: string): Promise<Heroes> {
+    async delete(id: string): Promise<any> {
         return this.heroesModel.findByIdAndDelete(id)
     }
 }

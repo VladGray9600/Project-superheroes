@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-sm-4 offset-sm-4">
+      <div class="card card-body">
+  
+        <form (submit)="edit ? update() : submitHero()">
+  
+          <div class="form-group">
+            <input type="text" name="nickname" [(ngModel)]="hero.nickname" class="form-control" placeholder="NickName" autofocus>
+          </div>
+          <div class="form-group">
+            <input type="text" name="real_name" [(ngModel)]="hero.real_name" class="form-control" placeholder="Real Name">
+          </div>
+          <div class="form-group">
+            <input type="text" name="original_description" [(ngModel)]="hero.original_description" class="form-control" placeholder="Origin Description">
+          </div>
+          <div class="form-group">
+            <input type="text" name="picture" [(ngModel)]="hero.picture" class="form-control" placeholder="Image URL">
+          </div>
+          <button class="btn btn-primary btn-block">
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>

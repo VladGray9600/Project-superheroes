@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, Param, Post, Put, Query, Redirect, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, Param, Post, Put, Query, Redirect, Res, UploadedFiles, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { CreateHeroDto } from './dto/create-heroes.dto';
 import { UpdateHeroDto } from './dto/update-heroes.dto';
@@ -9,7 +9,7 @@ import { Heroes } from './schemas/heroes.schemas';
 export class HeroesController {
     constructor(private readonly heroesService : HeroesService){}
 
-    @Get()
+    @Get('/')
     @HttpCode(HttpStatus.OK)
     getAll(@Query('count') count: number, @Query('offset') offset: number){
         return this.heroesService.getAll(count, offset)
@@ -24,9 +24,8 @@ export class HeroesController {
     @Post()
     @UseInterceptors(FileFieldsInterceptor([{ name: 'picture', maxCount: 1 }]))
     @HttpCode(HttpStatus.CREATED)
-    create(@UploadedFiles() files, @Body() createHeroDto: CreateHeroDto){
-        const  { picture } = files
-        return this.heroesService.create(createHeroDto, picture[0]);
+    create(@Body(new ValidationPipe()) createHeroDto: CreateHeroDto){
+        return this.heroesService.create(createHeroDto)
     }
 
     @Put(':id')
@@ -37,7 +36,11 @@ export class HeroesController {
 
     @Delete(':id')
     @HttpCode(HttpStatus.ACCEPTED)
-    remove(@Param('id') id: string){
-        return this.heroesService.remove(id)
+    delete(@Param('id') id: string){
+        console.log(id);
+        console.log(typeof id);
+        
+        
+        return this.heroesService.delete(id)
     }
 }
