@@ -9,8 +9,7 @@ import { FileService, FileType } from './file/file.service';
 
 @Injectable()
 export class HeroesService {
-    constructor(@InjectModel(Heroes.name) private heroesModel: Model<HeroesDocument>,
-    private fileService: FileService) {
+    constructor(@InjectModel(Heroes.name) private heroesModel: Model<HeroesDocument>) {
         
     }
     async getAll(count = 5, offset = 0) : Promise<Heroes[]>{
@@ -23,7 +22,6 @@ export class HeroesService {
     }
 
     async create(heroDto: CreateHeroDto) : Promise<Heroes> {
-        //const picturePath = this.fileService.createFile(FileType.IMAGE, picture)
         const newHero = await new this.heroesModel(heroDto)
         return newHero.save();
     }

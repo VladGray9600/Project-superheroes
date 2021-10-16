@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Hero } from '../interfaces/Hero';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,8 +14,8 @@ export class HeroesService {
 
   constructor(private http: HttpClient) { }
 
-  getHeroes(): Observable<Hero[]>{
-    return this.http.get<Hero[]>(`${this.BASE_URL}/heroes`);
+  getHeroes(pagination :{ count: number, offset: number }): Observable<Hero[]>{
+    return this.http.get<Hero[]>(`${this.BASE_URL}/heroes`, {params: pagination});
   }
 
   getHero(id: string): Observable<Hero> {

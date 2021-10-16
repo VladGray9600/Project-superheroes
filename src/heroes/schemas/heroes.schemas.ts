@@ -12,7 +12,7 @@ export class Heroes {
     real_name: string;
 
     @Prop()
-    original_discription: string;
+    original_description: string;
 
     @Prop()
     superpowers: string;

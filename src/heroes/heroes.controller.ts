@@ -3,7 +3,6 @@ import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { CreateHeroDto } from './dto/create-heroes.dto';
 import { UpdateHeroDto } from './dto/update-heroes.dto';
 import { HeroesService } from './heroes.service';
-import { Heroes } from './schemas/heroes.schemas';
 
 @Controller('heroes')
 export class HeroesController {
@@ -12,6 +11,8 @@ export class HeroesController {
     @Get('/')
     @HttpCode(HttpStatus.OK)
     getAll(@Query('count') count: number, @Query('offset') offset: number){
+        count = typeof +count === 'number' ? +count : undefined;
+        offset = typeof +offset === 'number' ? +offset : undefined;
         return this.heroesService.getAll(count, offset)
     }
 

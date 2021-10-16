@@ -26,7 +26,7 @@ export class HeroesFormComponent implements OnInit {
 
   ngOnInit(){
     const params = this.activatedRoute.snapshot.params;
-    if(params) {
+    if(params && params.id) {
       this.heroesService.getHero(params.id)
         .subscribe(
           res=>{

@@ -3,10 +3,7 @@
       <div class="col-md-8">
         <ul>
           <li>
-            id: {{hero._id}}
-          </li>
-          <li>
-            name: {{hero.nickname}}
+            Name: {{hero.nickname}}
           </li>
           <li>
             Real Name: {{hero.real_name}}
@@ -16,6 +13,9 @@
           </li>
           <li>
             Superpowers: {{hero.superpowers}}
+          </li>
+          <li>
+            Catch Phrase: {{hero.catch_phrase}}
           </li>
         </ul>
         <button (click)="delete(hero._id)" class="btn btn-danger">
@@ -29,4 +29,8 @@
         <img [src]="hero.picture" class="card-img">
       </div>
     </div>
+  </div>
+  <div class='row page-switcher'>
+    <button class='col-md-1 card' (click)='previousPage()'><p><</p></button>
+    <button class='col-md-1 card' (click)='nextPage()'><p>></p></button>
   </div>
